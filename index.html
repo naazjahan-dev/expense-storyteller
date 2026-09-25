@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Storyteller | Premium AI Finance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- GSAP & Lenis -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar glass-nav">
+        <div class="nav-container">
+            <div class="logo gsap-nav-item">
+                <div class="logo-icon"></div>
+                <span class="logo-text">Expense Storyteller</span>
+            </div>
+            <div class="nav-links gsap-nav-item" id="auth-nav-links">
+                <!-- Links change based on auth state -->
+                <a href="#features">Features</a>
+                <a href="#dashboard">Dashboard</a>
+                <a href="#pricing">Pricing</a>
+            </div>
+            <div class="nav-cta gsap-nav-item" id="auth-nav-cta">
+                <button class="btn btn-outline" id="btn-open-login">Log In</button>
+                <button class="btn btn-primary" id="btn-open-signup">Start Tracking Free</button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="public-view">
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="hero-bg-gradients">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+        </div>
+        <div class="container hero-container">
+            <div class="hero-content">
+                <div class="pill-badge gsap-hero-item">AI-Powered Financial Clarity</div>
+                <h1 class="hero-title gsap-hero-item">Your Money<br>Tells a Story.</h1>
+                <p class="hero-subtitle gsap-hero-item">Experience a new era of personal finance. Soft, luxurious, and driven by intelligent AI that turns your numbers into a clear narrative.</p>
+                <div class="hero-buttons gsap-hero-item">
+                    <button class="btn btn-large btn-primary">Start Tracking Free</button>
+                    <button class="btn btn-large btn-secondary">Watch the Film</button>
+                </div>
+            </div>
+            <div class="hero-visual gsap-hero-visual">
+                <div class="dashboard-wrapper">
+                    <img src="assets/dashboard_mockup_1778081337646.png" alt="Expense Storyteller Dashboard" class="main-dashboard-img">
+                    <div class="floating-widget widget-1" data-speed="1.2">
+                        <img src="assets/floating_card_1_1778081360464.png" alt="AI Insight Card">
+                    </div>
+                    <div class="floating-widget widget-2" data-speed="0.8">
+                        <img src="assets/floating_card_2_1778081379473.png" alt="Smart Categorization Widget">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Trusted By -->
+    <section class="trusted-section">
+        <div class="container">
+            <p class="trusted-text gsap-trusted">Trusted by modern professionals and innovative teams</p>
+            <div class="logo-cloud">
+                <div class="company-logo gsap-logo">Acme Corp</div>
+                <div class="company-logo gsap-logo">GlobalTech</div>
+                <div class="company-logo gsap-logo">Quantum</div>
+                <div class="company-logo gsap-logo">Nexus</div>
+                <div class="company-logo gsap-logo">Starlight</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Storytelling Features -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="section-header gsap-fade-up">
+                <h2 class="section-title">Intelligence meets elegance.</h2>
+                <p class="section-subtitle">Our AI doesn't just track your expenses. It understands them, categorizes them, and weaves them into a comprehensive financial story.</p>
+            </div>
+            
+            <div class="features-grid">
+                <!-- Smart Categorization -->
+                <div class="feature-card glass-card gsap-feature-card">
+                    <div class="feature-icon indigo-icon"></div>
+                    <h3 class="feature-title">Smart Categorization</h3>
+                    <p class="feature-desc">Every transaction is automatically tagged, sorted, and beautifully visualized with unparalleled accuracy.</p>
+                </div>
+                
+                <!-- Predictive Forecasting -->
+                <div class="feature-card glass-card gsap-feature-card">
+                    <div class="feature-icon lavender-icon"></div>
+                    <h3 class="feature-title">Predictive Forecasting</h3>
+                    <p class="feature-desc">See your financial future before it happens. Our models predict upcoming expenses and trends.</p>
+                </div>
+
+                <!-- Automated Insights -->
+                <div class="feature-card glass-card gsap-feature-card">
+                    <div class="feature-icon sky-icon"></div>
+                    <h3 class="feature-title">Automated Insights</h3>
+                    <p class="feature-desc">Receive gentle, intelligent nudges about your spending patterns and saving opportunities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sticky Dashboard Showcase -->
+    <section id="dashboard" class="showcase-section">
+        <div class="container showcase-container">
+            <div class="showcase-layout">
+                <!-- Sticky Visual Side -->
+                <div class="showcase-visual-col">
+                    <div class="sticky-visual-wrapper">
+                        <div class="glass-container showcase-glass">
+                            <img src="assets/dashboard_mockup_1778081337646.png" alt="Showcase Interface" class="showcase-img">
+                            <div class="showcase-glow"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Scrolling Text Side -->
+                <div class="showcase-text-col">
+                    <div class="showcase-step">
+                        <div class="step-content">
+                            <div class="step-badge">01. Seamless Integration</div>
+                            <h2>A dashboard that breathes.</h2>
+                            <p>Immerse yourself in a warm, calming interface designed to reduce financial anxiety. No more harsh spreadsheets. Just beautiful, fluid insights.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="showcase-step">
+                        <div class="step-content">
+                            <div class="step-badge">02. Dynamic Adaptation</div>
+                            <h2>Layouts that learn you.</h2>
+                            <p>The interface adapts based on what matters most to you right now. If savings are your priority, the dashboard subtly shifts to highlight your progress.</p>
+                        </div>
+                    </div>
+
+                    <div class="showcase-step">
+                        <div class="step-content">
+                            <div class="step-badge">03. Peace of Mind</div>
+                            <h2>Numbers that don't yell.</h2>
+                            <p>Soft pastel visualizations ensure that checking your finances feels like a gentle breeze, not an interrogation. Designed for ultimate serenity.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metric Counters Section -->
+    <section class="metrics-section">
+        <div class="container">
+            <div class="metrics-grid">
+                <div class="metric-item">
+                    <div class="metric-number"><span class="counter" data-target="98">0</span>%</div>
+                    <div class="metric-label">Categorization Accuracy</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-number"><span class="counter" data-target="150">0</span>k+</div>
+                    <div class="metric-label">Active Narratives</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-number">$<span class="counter" data-target="2">0</span>M+</div>
+                    <div class="metric-label">Savings Found</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us & Social Proof -->
+    <section class="testimonial-section">
+        <div class="container">
+            <div class="testimonial-card glass-card gsap-fade-up">
+                <div class="quote-mark">"</div>
+                <p class="testimonial-text">Expense Storyteller turned my financial chaos into a serene, beautifully organized narrative. It feels less like an accounting tool and more like a personal financial concierge.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar"></div>
+                    <div class="author-info">
+                        <h4>Elena R.</h4>
+                        <p>Creative Director</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Preview -->
+    <section id="pricing" class="pricing-section">
+        <div class="container">
+            <div class="section-header gsap-fade-up">
+                <h2 class="section-title">Simple, transparent pricing.</h2>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card glass-card gsap-pricing-card">
+                    <h3>Essential</h3>
+                    <div class="price"><span>$</span>0<span class="period">/mo</span></div>
+                    <p>Perfect for individuals starting their journey.</p>
+                    <button class="btn btn-outline">Get Started</button>
+                </div>
+                <div class="pricing-card glass-card premium-card gsap-pricing-card">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3>Premium</h3>
+                    <div class="price"><span>$</span>12<span class="period">/mo</span></div>
+                    <p>Advanced AI insights and predictive forecasting.</p>
+                    <button class="btn btn-primary w-100">Start Free Trial</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="cta-section">
+        <div class="cta-background"></div>
+        <div class="container cta-container gsap-fade-up">
+            <h2 class="cta-title">Ready to rewrite your financial story?</h2>
+            <p class="cta-subtitle">Join thousands who have discovered peace of mind with our intelligent platform.</p>
+            <button class="btn btn-large btn-primary">Start Tracking Free</button>
+        </div>
+    </section>
+
+    </div> <!-- end public-view -->
+
+    <!-- Authenticated Dashboard View -->
+    <div id="authenticated-view" style="display: none;" class="dashboard-container">
+        <div class="container">
+            <div class="dashboard-header gsap-fade-up">
+                <h1 class="dashboard-title">Welcome to your Narrative</h1>
+                <p class="dashboard-subtitle">Here is the story of your finances.</p>
+            </div>
+            
+            <div class="dashboard-grid">
+                <!-- Left Column -->
+                <div class="dashboard-left">
+                    <!-- Analytics Summary -->
+                    <div class="dashboard-card glass-card summary-card gsap-fade-up">
+                        <div class="summary-item">
+                            <span class="summary-label">Income</span>
+                            <h3 class="summary-value" id="dash-income">$0.00</h3>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Expenses</span>
+                            <h3 class="summary-value" id="dash-expenses">$0.00</h3>
+                        </div>
+                        <div class="summary-item highlight">
+                            <span class="summary-label">Savings</span>
+                            <h3 class="summary-value" id="dash-savings">$0.00</h3>
+                        </div>
+                    </div>
+
+                    <!-- AI Insights -->
+                    <div class="dashboard-card glass-card insights-card gsap-fade-up">
+                        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <div class="feature-icon indigo-icon small-icon"></div>
+                                <h3>AI Insights</h3>
+                            </div>
+                            <button class="btn btn-sm btn-outline" id="btn-generate-story">Story</button>
+                        </div>
+                        <div class="insights-list" id="dash-insights">
+                            <div class="loading-spinner">Generating insights...</div>
+                        </div>
+                    </div>
+
+                    <!-- Budget Progress -->
+                    <div class="dashboard-card glass-card budget-card gsap-fade-up">
+                        <div class="card-header">
+                            <h3>Monthly Budget</h3>
+                            <button class="btn btn-sm btn-outline" id="btn-edit-budget">Edit</button>
+                        </div>
+                        <div class="budget-progress-container">
+                            <div class="budget-stats">
+                                <span id="budget-spent">$0 spent</span>
+                                <span id="budget-total">of $0</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" id="budget-progress-fill" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="dashboard-right">
+                    <!-- Recent Transactions -->
+                    <div class="dashboard-card glass-card transactions-card gsap-fade-up">
+                        <div class="card-header">
+                            <h3>Recent Transactions</h3>
+                            <button class="btn btn-sm btn-primary" id="btn-add-tx-dash">Add New</button>
+                        </div>
+                        <div class="transactions-list" id="dash-transactions">
+                            <div class="empty-state">No transactions yet. Start your story.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <div class="logo-text">Expense Storyteller</div>
+                <p>AI-powered financial clarity wrapped in an elegant experience.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Product</h4>
+                <a href="#">Features</a>
+                <a href="#">Security</a>
+                <a href="#">Pricing</a>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <a href="#">About</a>
+                <a href="#">Blog</a>
+                <a href="#">Careers</a>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Expense Storyteller. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Auth Modal -->
+    <div class="modal-overlay" id="auth-modal">
+        <div class="modal-content glass-card premium-card">
+            <button class="modal-close" id="btn-close-auth">&times;</button>
+            <div class="modal-glow"></div>
+            <h3 id="auth-title">Welcome Back</h3>
+            <p id="auth-subtitle">Enter your details to access your narrative.</p>
+            <form id="auth-form" class="glass-form">
+                <div class="form-group" id="username-group" style="display: none;">
+                    <label for="auth-username">Username</label>
+                    <input type="text" id="auth-username" class="glass-input" placeholder="Your name">
+                </div>
+                <div class="form-group">
+                    <label for="auth-email">Email</label>
+                    <input type="email" id="auth-email" class="glass-input" placeholder="hello@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="auth-password">Password</label>
+                    <input type="password" id="auth-password" class="glass-input" placeholder="••••••••" required>
+                </div>
+                <div id="auth-error" class="form-error"></div>
+                <div style="display: flex; gap: 1rem;">
+                    <button type="submit" class="btn btn-primary" id="btn-auth-submit" style="flex: 1;">Log In</button>
+                    <button type="button" class="btn btn-outline" id="btn-open-reset" style="flex: 1; color: white; border-color: rgba(255,255,255,0.3);">Forgot Password</button>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <span id="auth-switch-text">Don't have an account? <a href="#" id="auth-switch-link">Sign Up</a></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Transaction Modal -->
+    <div class="modal-overlay" id="transaction-modal">
+        <div class="modal-content glass-card premium-card">
+            <button class="modal-close" id="btn-close-transaction">&times;</button>
+            <div class="modal-glow"></div>
+            <h3>New Transaction</h3>
+            <form id="transaction-form" class="glass-form">
+                <div class="form-group">
+                    <label for="trans-title">Title</label>
+                    <input type="text" id="trans-title" class="glass-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="trans-amount">Amount</label>
+                    <input type="number" id="trans-amount" class="glass-input" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="trans-type">Type</label>
+                    <select id="trans-type" class="glass-input" required>
+                        <option value="expense" class="dark-option">Expense</option>
+                        <option value="income" class="dark-option">Income</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="trans-category">Category</label>
+                    <input type="text" id="trans-category" class="glass-input" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Add Transaction</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Budget Modal -->
+    <div class="modal-overlay" id="budget-modal">
+        <div class="modal-content glass-card premium-card">
+            <button class="modal-close" id="btn-close-budget">&times;</button>
+            <div class="modal-glow"></div>
+            <h3>Set Monthly Budget</h3>
+            <form id="budget-form" class="glass-form">
+                <div class="form-group">
+                    <label for="budget-amount">Total Budget</label>
+                    <input type="number" id="budget-amount" class="glass-input" step="1" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Save Budget</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Password Reset Modal -->
+    <div class="modal-overlay" id="reset-modal">
+        <div class="modal-content glass-card premium-card">
+            <button class="modal-close" id="btn-close-reset">&times;</button>
+            <div class="modal-glow"></div>
+            <h3>Reset Password</h3>
+            <p>Enter your email to receive a reset link.</p>
+            <form id="reset-form" class="glass-form">
+                <div class="form-group">
+                    <label for="reset-email">Email</label>
+                    <input type="email" id="reset-email" class="glass-input" placeholder="hello@example.com" required>
+                </div>
+                <div id="reset-error" class="form-error" style="color: #ef4444; margin-bottom: 1rem;"></div>
+                <div id="reset-success" style="color: #10b981; margin-bottom: 1rem; display: none;">Check your email for the reset link!</div>
+                <button type="submit" class="btn btn-primary w-100" id="btn-reset-submit">Send Reset Link</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- New Password Modal -->
+    <div class="modal-overlay" id="new-password-modal">
+        <div class="modal-content glass-card premium-card">
+            <button class="modal-close" id="btn-close-new-password">&times;</button>
+            <div class="modal-glow"></div>
+            <h3>Set New Password</h3>
+            <p>Enter your new password.</p>
+            <form id="new-password-form" class="glass-form">
+                <div class="form-group">
+                    <label for="new-password">New Password</label>
+                    <input type="password" id="new-password" class="glass-input" placeholder="••••••••" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-new-password">Confirm New Password</label>
+                    <input type="password" id="confirm-new-password" class="glass-input" placeholder="••••••••" required>
+                </div>
+                <div id="new-password-error" class="form-error" style="color: #ef4444; margin-bottom: 1rem;"></div>
+                <div id="new-password-success" style="color: #10b981; margin-bottom: 1rem; display: none;">Password updated successfully!</div>
+                <button type="submit" class="btn btn-primary w-100" id="btn-new-password-submit">Update Password</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- AI Story Modal -->
+    <div class="modal-overlay" id="story-modal">
+        <div class="modal-content glass-card premium-card" style="max-width: 600px;">
+            <button class="modal-close" id="btn-close-story">&times;</button>
+            <div class="modal-glow"></div>
+            <h3>Your Financial Story</h3>
+            <div id="story-content" style="margin-top: 1rem; line-height: 1.6; color: rgba(255, 255, 255, 0.9);">
+                <div class="loading-spinner">Analyzing your narrative...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
