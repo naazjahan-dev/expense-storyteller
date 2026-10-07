@@ -22,7 +22,7 @@ async function fetchBackend(endpoint, method = 'GET', body = null) {
 
     try {
         // Assuming backend runs on localhost:5000 during dev
-        const response = await fetch(`http://localhost:5000/api${endpoint}`, options);
+        const response = await fetch('https://expense-storyteller.onrender.com/api${endpoint}',options);
         return await response.json();
     } catch (e) {
         console.error('API Error:', e);
